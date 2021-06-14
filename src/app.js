@@ -6,6 +6,7 @@ const helmet= require('helmet')
 const {NODE_ENV}= require('./config')
 
 const HobbiesRouter= require('./routes/getHobbies')
+const UsersRouter= require('./routes/getUsers')
 
 const app= express()
 
@@ -19,6 +20,7 @@ app.get('/', (req,res)=>{
 })
 
 app.use('/api/hobbies', HobbiesRouter)
+app.use('/api/users', UsersRouter)
 //error handler middleware
 app.use((error, req,res, next)=>{
     let response;

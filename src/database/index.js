@@ -20,18 +20,13 @@ const getUsers = () => {
   return mockDBCall(dataAccessMethod);
 };
 const getHobbies = () => {
-  const dataAccessMethod = () => {
-    // fill me in :) should return an array of hobbies without duplicate value.
-    let array= ['hobby 1', 'hobby 2', 'hobby 2']
-    let data=[]
-    array.forEach(i=>{
-      if(!data.includes(i)){
-        data.push(i)
-      }
-    })
-    return data;
-  };
-  return mockDBCall(dataAccessMethod);
+  
+  const dataAccessMethod = () => _.map(db.hobbiesOfUserByUsername, (obj) => Object.values(obj)).reduce((a,b)=>a.concat(b))
+
+  const array= dataAccessMethod()
+  const data= array.filter((i,pos)=>array.indexOf(i)==pos)
+  
+  return data;
 };
 
 const getListOfAgesOfUsersWith = (hobby) => {

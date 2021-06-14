@@ -1,11 +1,29 @@
 'use strict';
 const mockDBCalls = require('../database/index.js');
+const express= require('express')
+const UsersRouter= express.Router()
 
-const getUsersHandler = async (request, response) => {
+// const getUsersHandler = async (request, response) => {
+//     const data = await mockDBCalls.getUsers();
+//     return response.status(200).send(JSON.stringify(data));
+// };
+
+// module.exports = (app) => {
+//     app.get('/users', getUsersHandler);
+// };
+
+
+UsersRouter.route('/')
+  .get(async (req, res) =>{
     const data = await mockDBCalls.getUsers();
-    return response.status(200).send(JSON.stringify(data));
-};
+    return res.status(200).json(data);
+  })
 
-module.exports = (app) => {
-    app.get('/users', getUsersHandler);
-};
+UsersRouter.route('/age')
+  .get(async (req, res) =>{
+    const hobbyToLookup = 'pc gaming';
+    const data = await mockDBCalls.getListOfAgesOfUsersWith(hobbyToLookup);
+    return response.status(200).json(data)
+  })
+
+module.exports= UsersRouter
