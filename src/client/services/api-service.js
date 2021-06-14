@@ -1,8 +1,8 @@
-const API_ENPOINT= "http://localhost:8000/api/"
+const API_ENDPOINT= "http://localhost:8000/api"
 
 export const GeneralApiServices = {
     getAllItems(dbName){
-        return fetch(`http://localhost:8000/api/${dbName}`)
+        return fetch(`${API_ENDPOINT}/${dbName}`)
         .then(res =>
             (!res.ok)
               ? res.json().then(e => Promise.reject(e))
@@ -50,4 +50,15 @@ export const GeneralApiServices = {
         ? res.json().then(e=>Promise.reject(e))
         : res.json())
     },
+}
+
+export const UserApiServices={
+    getAgeDemographicByHobby(hobby){
+        return fetch(`${API_ENDPOINT}/users/age?hobbyToLookup=${hobby}`)
+        .then(res =>
+            (!res.ok)
+              ? res.json().then(e => Promise.reject(e))
+              : res.json()
+        )
+    }
 }

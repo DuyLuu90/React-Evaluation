@@ -21,7 +21,6 @@ export default class List extends React.Component {
 
   componentDidMount() {
     GeneralApiServices.getAllItems('users').then((data) => {
-    
       this.setState({
         list: data,
         counter:data.length,
@@ -58,24 +57,6 @@ export default class List extends React.Component {
     this.props.updateCounter(id)
   }
 
-  
-  // handleInputOnChange = (event) => {
-  //   this.setState({ inputText: event.target.value });
-  // };
-  // handleInputKeyUp = (event) => {
-  //   if (event.key === 'Enter') {
-  //     event.preventDefault();
-  //     const id= Math.floor(Math.random() * 10000);
-  //     const title = this.state.inputText;
-  //     const completed = false;
-  //     //const newItem = new Todo(id, title, completed,1);
-  //     const newItem={id,title,completed}      
-  //     this.handleAdd(newItem);
-  //     this.setState({
-  //       inputText: '',
-  //     });
-  //   }
-  // };
 
   renderItemList=()=>{
     const { list}= this.state
@@ -85,13 +66,6 @@ export default class List extends React.Component {
       </ul>  
     )
   }
-
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state,callback)=>{
-        return;
-    };
-}
  
   render() {
     const list= this.renderItemList()
@@ -111,7 +85,7 @@ export default class List extends React.Component {
   }
 }
 
-// export default conncent(withTodos(withAuth(withUser(list))));
+
 
 
 

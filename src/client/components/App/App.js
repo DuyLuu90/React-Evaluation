@@ -10,6 +10,7 @@ import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/footer';
 import List from '../List/List';
+import Hobby from '../List/Hobby'
 
 
 export default class App extends React.Component {
@@ -23,7 +24,8 @@ export default class App extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/contact" render={()=> <About></About>}/>
-                        <Route path="/users" component={List}/>
+                        <Route exact path="/users" component={List}/>
+                        <Route path="/users/age" component={Hobby}/>
                     </Switch>
                 </main>
                 <Footer />
@@ -35,8 +37,7 @@ export default class App extends React.Component {
 function Home() {
     return (
         <>
-            <h1>HOME</h1>
-            
+            <h1>HOME</h1>  
         </>
     );
   }
@@ -44,8 +45,7 @@ function Home() {
 function About() {
     return (
         <>
-            <h1>CONTACT US</h1>
-            
+            <h1>CONTACT US</h1> 
         </>
     );
 }

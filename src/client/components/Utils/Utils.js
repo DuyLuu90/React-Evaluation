@@ -38,6 +38,16 @@ export function User(item,index){
     
   )
 }
+export function AgeDemographic(item,index){
+  const {age,count}= item
+  return (
+    <li className="item" key={index}>
+      <span>{age}</span>
+      <span>{count}</span>
+    </li>
+    
+  )
+}
 
 /*
 
