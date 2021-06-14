@@ -1,0 +1,37 @@
+.list {
+    height: var(--height-list);
+    width: var(--width-list);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .list__header {
+    height: var(--height-list-header);
+    text-align: center;
+    line-height: var(--height-list-header);
+  }
+  
+  .list__input {
+    width: 100%;
+    height: var(--height-list-item);
+    padding: 5px;
+    font-size: 20px;
+    outline: none;
+    color: var(--color-secondary);
+    border: none;
+    border-bottom: 1px solid var(--color-secondary);
+    text-align: center;
+  }
+  .list__input:focus::placeholder{
+    color: transparent;
+  }
+  
+  .list__content {
+    list-style-type: none;
+    height: calc(
+      var(--height-list) - var(--height-list-header) -
+        var(--height-list-item)
+    );
+  
+    overflow: auto;
+  }
+  

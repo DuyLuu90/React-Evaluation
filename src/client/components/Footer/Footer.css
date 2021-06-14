@@ -1,0 +1,15 @@
+.app_footer{
+    position: absolute;
+    bottom: 0; left: 0; right:0;
+    height: 70px; padding: 15px;
+    background-color:var(--color-darkblue); color: white;
+    text-align: center; overflow: hidden;
+}
+
+.app_footer .icon, .app_footer a {
+    color: white;
+}
+
+.app_footer div {
+    margin-bottom: 10px;
+}

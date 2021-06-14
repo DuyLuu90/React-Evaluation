@@ -1,0 +1,31 @@
+.item {
+    height: var(--height-todolist-item);
+    font-size: 20px;
+    color: var(--color-secondary);
+    line-height: var(--height-todolist-item);
+    position: relative;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
+  
+.item:hover {
+    box-shadow: var(--box-shadow);
+  }
+  
+.item span {
+    padding-left: 10px;
+    width: var(--width-todolist-item-title);
+    height: var(--height-todolist-item);
+    overflow: hidden;
+  }
+  
+.item .btn-remove {
+    border: none;
+    background-color: white;
+    color: red;
+    padding: 15px;
+    outline: none;
+    font-size: 15px;
+    cursor: pointer;
+}

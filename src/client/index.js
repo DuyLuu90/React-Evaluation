@@ -1,7 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 
-const App = () => <h1>You should see a red color text here</h1>;
+import App from './components/App/App'
+import {BrowserRouter} from 'react-router-dom'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import {
+  faCopyright,
+  faEdit,
+  faTrash,
+  faHamburger,
+  faEnvelope,
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(
+  faCopyright,
+  faEdit,
+  faTrash,
+  faHamburger,
+  faEnvelope,
+)
+
+
+ReactDOM.render(
+  <BrowserRouter>
+    <App/>
+  </BrowserRouter>,document.getElementById('root'));
