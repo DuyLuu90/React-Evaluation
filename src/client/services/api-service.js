@@ -1,18 +1,8 @@
-//import config from '../config'
-
-//require('dotenv').config('../config')
-
-// console.log(config)
-// console.log(process.env.NODE_ENV)
-// console.log(process.env.REACT_APP_API_BASE_URL)
-
-const API_ENDPOINT= "https://jsonplaceholder.typicode.com/todos"
-
-// const API_ENPOINT= "http://localhost:8000/api"
+const API_ENPOINT= "http://localhost:8000/api/"
 
 export const GeneralApiServices = {
-    getAllItems(){
-        return fetch(`${API_ENDPOINT}`)
+    getAllItems(dbName){
+        return fetch(`http://localhost:8000/api/${dbName}`)
         .then(res =>
             (!res.ok)
               ? res.json().then(e => Promise.reject(e))

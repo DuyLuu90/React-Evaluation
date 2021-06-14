@@ -13,9 +13,10 @@ export default class Header extends React.Component {
         <span>Counter: {this.props.counter}</span>
         <nav className="nav">
           <Link to="/">HOME</Link>
-          <Link to="/about">About</Link>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/list">List</Link>
+          <Link to="/users">User List</Link>
+          <Link to="/users/age">Age Demographic</Link>
+          <Link to="/contact">Contact Us</Link>
+          
         </nav>
       </div>
     );

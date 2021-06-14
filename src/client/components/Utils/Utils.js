@@ -27,3 +27,26 @@ export function Item(item,index,handleDelete){
     
   )
 }
+
+export function User(item,index){
+  const {username,age}= item
+  return (
+    <li className="item" key={index}>
+      <span>{username}</span>
+      <span>{age}</span>
+    </li>
+    
+  )
+}
+
+/*
+
+<button 
+        id={id}
+        className="btn-remove"
+        onClick={()=>handleDelete(id)}
+      >
+        <FontAwesomeIcon className="control-icon" icon="trash"/>
+      </button>
+
+*/

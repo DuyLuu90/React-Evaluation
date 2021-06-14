@@ -1,13 +1,30 @@
 .list {
-    height: var(--height-list);
     width: var(--width-list);
+    max-width: 500px;
+    max-height: var(--height-list);
     box-shadow: var(--box-shadow);
+    padding: 10px;
   }
   
   .list__header {
     height: var(--height-list-header);
     text-align: center;
     line-height: var(--height-list-header);
+  }
+
+  .list__columns{
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+    height: 50px;
+  }
+
+  .item{
+    height: 30px;
+    border-bottom: 0.5px solid rgb(192, 176, 176);
   }
   
   .list__input {

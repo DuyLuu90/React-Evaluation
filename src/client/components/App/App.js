@@ -22,8 +22,8 @@ export default class App extends React.Component {
                     
                     <Switch>
                         <Route exact path="/" component={Home}/>
-                        <Route path="/about" render={()=> <About></About>}/>
-                        <Route path="/list" component={List}/>
+                        <Route path="/contact" render={()=> <About></About>}/>
+                        <Route path="/users" component={List}/>
                     </Switch>
                 </main>
                 <Footer />
@@ -44,7 +44,7 @@ function Home() {
 function About() {
     return (
         <>
-            <h1>ABOUT</h1>
+            <h1>CONTACT US</h1>
             
         </>
     );

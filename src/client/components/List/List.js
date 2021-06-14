@@ -1,7 +1,7 @@
 import React from 'react';
 import {GeneralApiServices} from '../../services/api-service'
 
-import {Item} from '../Utils/Utils'
+import {User} from '../Utils/Utils'
 
 import './List.css';
 
@@ -13,16 +13,15 @@ export default class List extends React.Component {
   
 
   state = {
-    title:'List',
+    title:'All Users',
     inputText: '',
     list: [],
     counter:0,
   };
 
   componentDidMount() {
-    GeneralApiServices.getAllItems().then((data) => {
-      //this.props.updateCounter(data.length)
-      //console.log(data)
+    GeneralApiServices.getAllItems('users').then((data) => {
+    
       this.setState({
         list: data,
         counter:data.length,
@@ -31,17 +30,17 @@ export default class List extends React.Component {
     //this.props.updateCounter(this.state.counter)
   }
 
-  handleAdd=(item)=>{
+  // handleAdd=(item)=>{
     
-    GeneralApiServices.postItem(item).then(data=>{
-      this.setState({
-        list:[data, ...this.state.list],
-        counter: this.state.counter+1,
-      })
-    })
-    //this.props.updateCounter();
+  //   GeneralApiServices.postItem(item).then(data=>{
+  //     this.setState({
+  //       list:[data, ...this.state.list],
+  //       counter: this.state.counter+1,
+  //     })
+  //   })
+  //   //this.props.updateCounter();
     
-  }
+  // }
 
   handleDelete=(id)=>{
     GeneralApiServices.deleteItemById(id)
@@ -60,29 +59,29 @@ export default class List extends React.Component {
   }
 
   
-  handleInputOnChange = (event) => {
-    this.setState({ inputText: event.target.value });
-  };
-  handleInputKeyUp = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      const id= Math.floor(Math.random() * 10000);
-      const title = this.state.inputText;
-      const completed = false;
-      //const newItem = new Todo(id, title, completed,1);
-      const newItem={id,title,completed}      
-      this.handleAdd(newItem);
-      this.setState({
-        inputText: '',
-      });
-    }
-  };
+  // handleInputOnChange = (event) => {
+  //   this.setState({ inputText: event.target.value });
+  // };
+  // handleInputKeyUp = (event) => {
+  //   if (event.key === 'Enter') {
+  //     event.preventDefault();
+  //     const id= Math.floor(Math.random() * 10000);
+  //     const title = this.state.inputText;
+  //     const completed = false;
+  //     //const newItem = new Todo(id, title, completed,1);
+  //     const newItem={id,title,completed}      
+  //     this.handleAdd(newItem);
+  //     this.setState({
+  //       inputText: '',
+  //     });
+  //   }
+  // };
 
   renderItemList=()=>{
     const { list}= this.state
     return (
       <ul className="list__content">
-        {list.map((item,index)=>Item(item,index,this.handleDelete))}
+        {list.map((item,index)=>User(item,index))}
       </ul>  
     )
   }
@@ -100,17 +99,12 @@ export default class List extends React.Component {
       <section className="list">
         
         <header className="list__header">
-          <h1>Counter: {this.state.counter}</h1>
-          <h4 className="heading">Item List</h4>
+          <h1>All Users: {this.state.counter}</h1>
         </header>
-        <input
-          type="text"
-          className="list__input"
-          placeholder="What are you going to do?"
-          onChange={this.handleInputOnChange}
-          onKeyUp={this.handleInputKeyUp}
-          value={this.state.inputText}
-        />
+        <div className="list__columns">
+          <span>User Name</span>
+          <span>User Age</span>
+        </div>
         {list}
       </section>
     );
