@@ -5,6 +5,8 @@ const cors = require('cors')
 const helmet= require('helmet')
 const {NODE_ENV}= require('./config')
 
+const HobbiesRouter= require('./routes/getHobbies')
+
 const app= express()
 
 const morganSetting=(NODE_ENV === 'production'? 'tiny': 'common')
@@ -15,6 +17,8 @@ app.use(helmet())
 app.get('/', (req,res)=>{
     res.send("Hello, boilerplate")
 })
+
+app.use('/api/hobbies', HobbiesRouter)
 //error handler middleware
 app.use((error, req,res, next)=>{
     let response;
