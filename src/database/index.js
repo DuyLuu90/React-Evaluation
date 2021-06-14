@@ -30,14 +30,33 @@ const getHobbies = () => {
 };
 
 const getListOfAgesOfUsersWith = (hobby) => {
-  const dataAccessMethod = () => {
-    // fill me in :) should return an arry of age count based on hobby.
-    return [
-      { age: 18, count: 2 },
-      { age: 12, count: 1 },
-    ];
-  };
-  return mockDBCall(dataAccessMethod);
+  const names=[]
+  const data=[];
+  const dataAccessMethod1 = () => _.forEach(db.hobbiesOfUserByUsername, (array,key) => {
+    if (array.includes(hobby)){
+      names.push(key)
+    }  
+  })
+  dataAccessMethod1()
+
+  const dataAccessMethod2= ()=> _.forEach(db.usersById, (obj) => {
+    if (names.includes(obj.username)){
+      if (data.find(i=>i.age===obj.age)){
+        let element= data.find(i=>i.age===obj.age)
+        element.count = element.count+1; 
+      }
+      else {
+        data.push({
+          age: obj.age,
+          count: 1
+        })
+      }
+    }  
+  })
+
+  dataAccessMethod2()
+
+  return data;
 };
 
 module.exports = {

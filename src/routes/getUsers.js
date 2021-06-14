@@ -21,9 +21,10 @@ UsersRouter.route('/')
 
 UsersRouter.route('/age')
   .get(async (req, res) =>{
-    const hobbyToLookup = 'pc gaming';
+    //const hobbyToLookup = 'pc gaming';
+    const {hobbyToLookup}= req.query
     const data = await mockDBCalls.getListOfAgesOfUsersWith(hobbyToLookup);
-    return response.status(200).json(data)
+    return res.status(200).json(data)
   })
 
 module.exports= UsersRouter
