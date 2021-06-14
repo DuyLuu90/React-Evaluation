@@ -1,10 +1,10 @@
 'use strict';
 
-const serverStart = require('./server.js');
+// const serverStart = require('./server.js');
 
-const main = async () => {
-    await serverStart();
-    return;
-};
+// const main = async () => {
+//     await serverStart();
+//     return;
+// };
 
-main();
+// main();
