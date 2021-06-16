@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {GeneralApiServices, UserApiServices} from '../../services/api-service'
 //import { Button, Fab} from '@material-ui/core';
 //import Fab from '@material-ui/core/Fab';
 //import DeleteIcon from '@material-ui/icons/Delete';
@@ -10,22 +11,81 @@ import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/footer';
 import List from '../List/List';
-import Hobby from '../List/Hobby'
-
 
 export default class App extends React.Component {
+    state= {
+        hobbies:{
+            header:'Age Demographic of Users with hobby',
+            columns: ["Age", "Count"],
+            list:[],
+        },
+        users:{
+            header:'',
+            columns: [],
+            list:[], 
+        },
+        counter:0,
+    }
+
+    updateData=(data)=>{
+        return {
+
+        }
+    }
+
+    componentDidMount(){
+        GeneralApiServices.getAllItems('users').then((data) => {
+            this.setState({
+                users:{
+                    header: `All Users: ${data.length}`,
+                    list:data,
+                    columns: Object.keys(data[0]).map(s=>s.charAt(0).toUpperCase() + s.slice(1))
+                },
+                counter: data.length,
+            })
+        })
+        GeneralApiServices.getAllItems('hobbies').then((data) => {
+            this.setState({
+                hobbies:{
+                    ...this.state.hobbies,
+                    hobbies: data,
+                }
+            })
+            this.updateListByHobby(data[0])
+            })
+    }
+
+    updateListByHobby= (hobby)=>{
+        UserApiServices.getAgeDemographicByHobby(hobby).then((data)=>{
+            this.setState({
+                hobbies:{
+                    ...this.state.hobbies,
+                    list: data,
+                }
+            })
+        })
+    }
+
     render() {
-        console.log(process.env.NODE_ENV)
+        const {users, hobbies}= this.state
+        
         return (
             <>
-                <Header />
+                <Header counter={this.state.counter}/>
                 <main className='content'>
-                    
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/contact" render={()=> <About></About>}/>
-                        <Route exact path="/users" component={List}/>
-                        <Route path="/users/age" component={Hobby}/>
+                        <Route exact path="/users" render={()=><List 
+                            {...users}
+                        />}
+                        />
+                        <Route path="/users/age" render={()=><List 
+                            {...hobbies}
+                            updateList={this.updateListByHobby}
+                        />}
+                        />
+                        
                     </Switch>
                 </main>
                 <Footer />

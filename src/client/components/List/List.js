@@ -1,84 +1,63 @@
 import React from 'react';
-import {GeneralApiServices} from '../../services/api-service'
-
-import {User} from '../Utils/Utils'
+import {Item} from '../Utils/Utils'
 
 import './List.css';
 
-
 export default class List extends React.Component {
   static defaultProps = {
-    updateCounter: ()=>{}
+    title:'',
+    columns:[],
+    list:[],
+    hobbies:[],
+    updateCounter: ()=>{},
+    updateList:()=>{},
   }
   
-
   state = {
-    title:'All Users',
-    inputText: '',
-    list: [],
-    counter:0,
+    
   };
 
-  componentDidMount() {
-    GeneralApiServices.getAllItems('users').then((data) => {
-      this.setState({
-        list: data,
-        counter:data.length,
-      })
-    })
-    //this.props.updateCounter(this.state.counter)
+  handleChange=(e)=>this.props.updateList(e.target.value)
+
+  renderColumns= (columns)=>{
+    return (
+      <div className="list__columns">
+        {columns.map((item,index)=><span key={index}>{item}</span>)}
+      </div>
+    )
   }
-
-  // handleAdd=(item)=>{
-    
-  //   GeneralApiServices.postItem(item).then(data=>{
-  //     this.setState({
-  //       list:[data, ...this.state.list],
-  //       counter: this.state.counter+1,
-  //     })
-  //   })
-  //   //this.props.updateCounter();
-    
-  // }
-
-  handleDelete=(id)=>{
-    GeneralApiServices.deleteItemById(id)
-    .then(()=>{
-      this.setState({
-        list: this.state.list.filter(item=> item.id !==id),
-        counter: this.state.counter-1,
-      })
-     
-    })
-    .catch(err=>console.warn(err))
-  }
-
-  refresh=(id)=>{
-    this.props.updateCounter(id)
-  }
-
 
   renderItemList=()=>{
-    const { list}= this.state
+    const { list}= this.props
     return (
       <ul className="list__content">
-        {list.map((item,index)=>User(item,index))}
+        {list.map((item,index)=>Item(item,index))}
       </ul>  
     )
   }
- 
+
+  renderHobbiesList=(hobbies)=>{
+    return (
+      <div className='list__form'>
+        <label htmlFor="hobbies" >Choose a hobby: </label>
+        <select name='hobbies'id='hobbies' 
+          onChange={(e)=>this.handleChange(e)}>
+          {hobbies.map((item,index)=><option value={item} key={index}>{item}</option>)}
+        </select>
+      </div>
+    )
+  }
+
   render() {
+    const {header,columns,hobbies}= this.props
     const list= this.renderItemList()
     return (
       <section className="list">
-        
         <header className="list__header">
-          <h1>All Users: {this.state.counter}</h1>
+          <h1>{header}</h1>
         </header>
-        <div className="list__columns">
-          <span>User Name</span>
-          <span>User Age</span>
-        </div>
+        {hobbies.length>0 && this.renderHobbiesList(hobbies)}
+        {columns && this.renderColumns(columns)}
         {list}
       </section>
     );
